@@ -6,6 +6,7 @@ import com.example.mainservice.entity.Book;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import java.util.List;
+import java.util.Map;
 
 public interface BookService {
     String changeToBase64(String image);
@@ -22,4 +23,6 @@ public interface BookService {
     List<Book> findBooksByTagRelation(String tagName) throws JsonProcessingException;
 
     Book findBookByName(String name);
+
+    Map<String, Integer> getBookWordCount();
 }

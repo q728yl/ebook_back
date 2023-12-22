@@ -16,7 +16,7 @@ public class Book {
     private String title;
     private String IBSN;
     private String author;
-    private String image;
+//    private String image;
     private String description;
     private BigDecimal price;
     private BigDecimal rating;

@@ -129,41 +129,48 @@ private BookTypeRepository bookTypeRepository;
 
 
     }
-//    @PostMapping("/getBookByType")
-//    public Map<String, Object> findBooksByTagRelation(@RequestBody Map<String,Object> body) throws JsonProcessingException {
-//        String tagName = (String) body.get("tagName");
-//        System.out.println("hhhhh"+tagName);
-//        List<Book> bookList = bookService.findBooksByTagRelation(tagName);
-//        Map<String, Object> map = new HashMap<>();
-//        map.put("Books",bookList);
-//        return map;
-//    }
-//    @RequestMapping("/neo4j")
-//    public List<Book> testNeo4j() throws JsonProcessingException {
-//        // 先删除所有的内容
-//        bookTypeRepository.deleteAll();
-//        // 添加书籍类型
-//        BookType bookType1 = new BookType("软件");
-//        BookType bookType2 = new BookType("英文");
-//        BookType bookType3 = new BookType("电路");
-//        BookType bookType4 = new BookType("编程");
-//
-//        // 数据准备
-//        bookType1.addBookID(1);
-//        bookType2.addBookID(4);
-//        bookType3.addBookID(2);
-//        bookType4.addBookID(3);
-//
-//        bookType1.addRelateBookType(bookType2);
-//        bookType2.addRelateBookType(bookType4);
-//
-//        bookTypeRepository.save(bookType1);
-//        bookTypeRepository.save(bookType2);
-//        bookTypeRepository.save(bookType3);
-//        bookTypeRepository.save(bookType4);
-//
-//
-//        return bookService.findBooksByTagRelation("软件");
-//    }
+    @PostMapping("/getBookByType")
+    public Map<String, Object> findBooksByTagRelation(@RequestBody Map<String,Object> body) throws JsonProcessingException {
+        String tagName = (String) body.get("tagName");
+        System.out.println("hhhhh"+tagName);
+        List<Book> bookList = bookService.findBooksByTagRelation(tagName);
+        Map<String, Object> map = new HashMap<>();
+        map.put("Books",bookList);
+        return map;
+    }
+    @RequestMapping("/neo4j")
+    public List<Book> testNeo4j() throws JsonProcessingException {
+        // 先删除所有的内容
+        bookTypeRepository.deleteAll();
+        // 添加书籍类型
+        BookType bookType1 = new BookType("软件");
+        BookType bookType2 = new BookType("英文");
+        BookType bookType3 = new BookType("电路");
+        BookType bookType4 = new BookType("编程");
+
+        // 数据准备
+        bookType1.addBookID(1);
+        bookType2.addBookID(4);
+        bookType3.addBookID(2);
+        bookType4.addBookID(3);
+
+        bookType1.addRelateBookType(bookType2);
+        bookType2.addRelateBookType(bookType4);
+
+        bookTypeRepository.save(bookType1);
+        bookTypeRepository.save(bookType2);
+        bookTypeRepository.save(bookType3);
+        bookTypeRepository.save(bookType4);
+
+
+        return bookService.findBooksByTagRelation("软件");
+    }
+    @GetMapping("/getBookWordCount")
+    public  Message getBookWordCount() throws JsonProcessingException {
+
+        Map<String, Integer> map = bookService.getBookWordCount();
+
+        return new Message("getWordCount success",true,map);
+    }
 
 }
