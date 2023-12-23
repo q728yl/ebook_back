@@ -55,21 +55,16 @@ public class BookServiceImpl implements BookService{
     @Override
     public Map<String, Integer> getBookWordCount(){
        List<Book>books  = bookDao.findAll();
-
         // 用于保存每个tag对应的描述内容
         Map<String, StringBuilder> tagDescriptions = new HashMap<>();
-
         for (Book book : books) {
-            String tag = book.getTag();  // 假设Book类有一个getTag()方法来获取tag
-            String description = book.getDescription();  // 假设Book类有一个getDescription()方法来获取description
-
+            String tag = book.getTag();
+            String description = book.getDescription();
             // 根据tag获取或创建StringBuilder对象
             StringBuilder sb = tagDescriptions.computeIfAbsent(tag, k -> new StringBuilder());
-
             // 将description添加到相应的StringBuilder对象中
             sb.append(description).append("\n");
         }
-
         // 将每个tag对应的描述内容写入文件
         for (Map.Entry<String, StringBuilder> entry : tagDescriptions.entrySet()) {
             String tag = entry.getKey();

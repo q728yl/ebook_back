@@ -167,9 +167,7 @@ private BookTypeRepository bookTypeRepository;
     }
     @GetMapping("/getBookWordCount")
     public  Message getBookWordCount() throws JsonProcessingException {
-
         Map<String, Integer> map = bookService.getBookWordCount();
-
         return new Message("getWordCount success",true,map);
     }
 
